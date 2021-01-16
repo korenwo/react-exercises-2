@@ -1,14 +1,21 @@
-import React from 'react';
-import './Counter.scss';
 
-function Counter() {
-	return (
-		<div className="Counter">
-			<p>Make the button increase the value:</p>
-			<button>Increase</button>
-			<div className="Counter__value">0</div>
-		</div>
-	)
+import './Counter.scss';
+import React, { useState } from 'react';
+
+function Counter () {
+
+    const [counter, setCounter] = useState(0);
+
+    function increase () {
+        setCounter(counter + 1);
+    }
+
+    return (
+        <div>
+            <button onClick={increase}>Increase</button>
+            {counter}
+        </div>
+    );
 }
 
 export default Counter;

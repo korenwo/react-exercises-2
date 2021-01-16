@@ -2,6 +2,11 @@ import React, { useState } from 'react';
 import './Marker.scss';
 
 function Marker() {
+	const [input, setInput] = useState('')
+
+	function inputHandler (e) {
+		setInput(e.target.value);
+	}
 
 	const [items, setItems] = useState([
 		"First item",
@@ -19,9 +24,17 @@ function Marker() {
 				Apply the marker for <u>all items</u>.
 			</p>
 
-			<input type="text" placeholder="Text to marker..." />
+			<input type="text" onInput={inputHandler} placeholder="Text to marker..." />
+
 			<ul>
-				{ /* The list should be here */ }
+				{items.map((item, i)=>{ 
+					if (input.length > 1 && item.indexOf(input) > -1) {				
+						const partsArr = item.split(input); 
+						return <li key={i}>{partsArr[0]}<span class="marker">{input}</span>{partsArr[1]}</li>
+					} else {
+						return <li key={i}>{item}</li>;
+					 }
+				})}
 			</ul>
 		</div>
 	)

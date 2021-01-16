@@ -1,7 +1,14 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './RealNumber.scss';
 
 function RealNumber() {
+
+	const [input, setInput] = useState('')
+
+	function inputHandler (e) {
+		setInput(e.target.value);
+	}
+
 	return (
 		<div className="RealNumber">
 			<p>
@@ -11,8 +18,8 @@ function RealNumber() {
 				"A13" - <span className="value--invalid">invalid</span>
 			</p>
 
-			<input type="text" className="text-box" />
-			<button>Submit</button>
+			<input type="text" onInput={inputHandler} className="text-box" />
+			{!isNaN(input) ? <button className="Submit">submit</button> : ''}
 		</div>
 	)
 }
